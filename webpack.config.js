@@ -4,13 +4,12 @@ const cleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     mode:"development",
-    // entry: {
-    //     "lbzx": "./src/app.js",
-    //     "zqhl": "./src/main.js"
-    // },
-    entry: ["./src/app.js"],
+    entry: {
+        "lbzx": "./src/app.js",
+        "zqhl": "./src/main.js"
+    },
     output: {
-        publicPath: './',
+        publicPath: '/',
         filename: "[name].js",
         path: path.resolve(__dirname, "./dist"),
         // publicPath: 'http://cdn.com/'
@@ -55,10 +54,5 @@ module.exports = {
         //     chunks: ['zqhl']
         // })
 
-    ],
-    devServer: {  //这里配置webpack-dev-server
-        publicPath: '/dist/'
-        //这里还可以加入其它你需要的参数
-    },
-    
+    ]
 }
