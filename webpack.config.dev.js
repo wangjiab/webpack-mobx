@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     mode: "development",
     devServer: {
@@ -39,16 +37,16 @@ module.exports = {
                     }
                 }
             },
-            // {
-            //     test: /\.less$/,
-            //     use: ExtractTextPlugin.extract({
-            //         fallback: "style-loader",
-            //         use: ["css-loader", 'postcss-loader', 'less-loader']
-            //     })
-            // },
             {
                 test: /\.less$/,
-                use: ['style-loader', 'css-loader','postcss-loader', 'less-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000
+                }
             }
             // {
             //     test: /\.js$/,
@@ -61,9 +59,9 @@ module.exports = {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        // new ExtractTextPlugin("[name].css"),
         new HtmlWebpackPlugin({
-            filename: 'index.html'
+            filename: 'index.html',
+            template: './src/index.html',
         })
     ]
 }

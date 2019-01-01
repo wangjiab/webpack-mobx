@@ -31,12 +31,21 @@ module.exports = {
                     use: ["css-loader", 'postcss-loader', 'less-loader']
                 })
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000
+                }
+              }
         ]
     },
     plugins: [
+        new cleanWebpackPlugin(['dist']),
         new ExtractTextPlugin("[name].css"),
         new HtmlWebpackPlugin({
-            filename: 'index.html'
+            filename: 'index.html',
+            template: './src/index.html',
         })
     ]
 }

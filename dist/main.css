@@ -3,7 +3,10 @@
   padding: 0;
 }
 body {
-  background-color: gray;
-  -webkit-transform: rotateX(30deg);
-          transform: rotateX(30deg);
+  width: 200px;
+  height: 300px;
+  background-image: url(./07a709ba284c35f4b2e063b59aede30e.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
