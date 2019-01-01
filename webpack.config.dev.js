@@ -1,18 +1,30 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-    mode:"development",
-    entry: {
-        "lbzx": "./src/app.js",
-        "zqhl": "./src/main.js"
+    mode: "development",
+    devServer: {
+        publicPath: '/dist/',
+        hot: true,
+        historyApiFallback: true,
+        inline: true,
+        stats: {
+            colors: true,
+            hash: false,
+            timings: true,
+            chunks: false,
+            chunkModules: false,
+            modules: false
+        }
+        //这里还可以加入其它你需要的参数
     },
+    entry: ["./src/app.js"],
     output: {
-        publicPath: '/',
-        filename: "[name].js",
-        path: path.resolve(__dirname, "./dist"),
-        // publicPath: 'http://cdn.com/'
+        path: path.join(__dirname, '/dist'),
+        publicPath: '/dist/',
+        filename: "[name].js"
     },
     module: {
         rules: [
@@ -27,13 +39,17 @@ module.exports = {
                     }
                 }
             },
+            // {
+            //     test: /\.less$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: "style-loader",
+            //         use: ["css-loader", 'postcss-loader', 'less-loader']
+            //     })
+            // },
             {
                 test: /\.less$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: ["css-loader",'postcss-loader', 'less-loader']
-                })
-            },
+                use: ['style-loader', 'css-loader','postcss-loader', 'less-loader']
+            }
             // {
             //     test: /\.js$/,
             //     loader: 'eslint-loader',
@@ -43,16 +59,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new cleanWebpackPlugin(['dist']),
-        new ExtractTextPlugin("[name].css"),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        // new ExtractTextPlugin("[name].css"),
         new HtmlWebpackPlugin({
-            filename: 'index.html',// 打包后的htmnl文件名      
-            chunks: ['lbzx'],
-        }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'zqhl.html',// 打包后的htmnl文件名  
-        //     chunks: ['zqhl']
-        // })
-
+            filename: 'index.html'
+        })
     ]
 }

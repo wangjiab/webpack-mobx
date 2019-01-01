@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack -d -p  --watch",
-    "prod": "webpack -d",
+    "dev": "node server.js",
+    "prod": " webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "lint": "eslint src"
   },
   "devDependencies": {
