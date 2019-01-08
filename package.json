@@ -29,6 +29,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^2.1.0",
+    "fjpublish": "^2.0.1",
     "less-loader": "^4.1.0",
     "style-loader": "^0.23.1"
   }
